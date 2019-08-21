@@ -13,9 +13,9 @@ connectDB();
 app.use(express.json({ extended:false }));
 
 //To send data, we can do res.send,res.sendFile or res.json
-app.get('/',(req, res) => 
-    res.json({ msg: 'Welcome to the ContactKeeper API' })
-);
+// app.get('/',(req, res) => 
+//     res.json({ msg: 'Welcome to the ContactKeeper API' })
+// );
 
 //Define Routes
 app.use('/api/users', require('./routes/users'));
