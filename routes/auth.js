@@ -54,7 +54,7 @@ async (req, res) =>{
         let user = await User.findOne({ email });
 
         if(!user) {
-            return res.status(400).json({ msg:'Invalid Credentails' })
+            return res.status(400).json({ msg:'Invalid Credentials' })
         }
         //================  Check Password with bcrpty.compare ==============
         //if there is a user, we want to check password, 
