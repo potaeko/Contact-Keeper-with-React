@@ -48,6 +48,7 @@ const ContactForm = () => {
         e.preventDefault();
         //clearAll
         if(current === null) {
+            //show contact in UI
             addContact(contact)
         } else {
             updateContact(contact);

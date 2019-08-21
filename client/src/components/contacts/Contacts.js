@@ -1,40 +1,132 @@
 //=======================================================================
-//              Step #4  UI fade transition, react-transition-group
+//              Step #6  GetContact for backend & Show spinner
 //=======================================================================
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import ContactItem from './ContactItem';
+import Spinner from '../layout/Spinner';
 import ContactContext from '../../context/contact/contactContext';
 
 const Contacts = () => {
     const contactContext = useContext(ContactContext);
 
-    const { contacts, filtered } = contactContext; //pull out from contactState.js
+    const { contacts, filtered, getContacts, loading } = contactContext; //pull out from contactState.js
 
-    if(contacts.length === 0) {
+    useEffect(() => {
+        getContacts();
+        //eslint-disable-next-line
+    }, []);
+
+    if(contacts !== null && contacts.length === 0 && !loading) {
         return <h4>Please add a contact</h4>;
     }
 
     return (
         <Fragment>
+            {/* //if contacts is not null and not loading then spinner */}
+            {contacts !== null && !loading ? (
             <TransitionGroup>
-            {filtered !== null 
+                {filtered !== null 
                 ? filtered.map(contact => (
-                    <CSSTransition key={contact.id} timeout={500} classNames="item">
-                        <ContactItem  contact={contact} />
+                    //change contact.id (hard coded with uuid) to contact._id for Mongodb
+                    <CSSTransition 
+                        key={contact._id}  
+                        timeout={500} 
+                        classNames="item"
+                        >
+                            <ContactItem  contact={contact} />
                     </CSSTransition>
                 ))
                 : contacts.map(contact => (
-                    <CSSTransition key={contact.id} timeout={500} classNames="item">
-                        <ContactItem contact={contact} />
+                    <CSSTransition 
+                        key={contact._id} 
+                        timeout={500} 
+                        classNames="item"
+                        >
+                            <ContactItem contact={contact} />
                     </CSSTransition>
                 ))}
-            </TransitionGroup>
+            </TransitionGroup>) : <Spinner />}
         </Fragment>
     );
 };
 
 export default Contacts
+//=======================================================================
+//              Step #5  Connect with Mongodb, addContact
+//=======================================================================
+// import React, { Fragment, useContext } from 'react';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
+// import ContactItem from './ContactItem';
+// import ContactContext from '../../context/contact/contactContext';
+
+// const Contacts = () => {
+//     const contactContext = useContext(ContactContext);
+
+//     const { contacts, filtered } = contactContext; //pull out from contactState.js
+
+//     if(contacts.length === 0) {
+//         return <h4>Please add a contact</h4>;
+//     }
+
+//     return (
+//         <Fragment>
+//             <TransitionGroup>
+//             {filtered !== null 
+//                 ? filtered.map(contact => (
+//                     //change contact.id (hard coded with uuid) to contact._id for Mongodb
+//                     <CSSTransition key={contact._id} timeout={500} classNames="item">
+//                         <ContactItem  contact={contact} />
+//                     </CSSTransition>
+//                 ))
+//                 : contacts.map(contact => (
+//                     <CSSTransition key={contact._id} timeout={500} classNames="item">
+//                         <ContactItem contact={contact} />
+//                     </CSSTransition>
+//                 ))}
+//             </TransitionGroup>
+//         </Fragment>
+//     );
+// };
+
+// export default Contacts
+//=======================================================================
+//              Step #4  UI fade transition, react-transition-group
+//=======================================================================
+// import React, { Fragment, useContext } from 'react';
+// import { CSSTransition, TransitionGroup } from 'react-transition-group';
+// import ContactItem from './ContactItem';
+// import ContactContext from '../../context/contact/contactContext';
+
+// const Contacts = () => {
+//     const contactContext = useContext(ContactContext);
+
+//     const { contacts, filtered } = contactContext; //pull out from contactState.js
+
+//     if(contacts.length === 0) {
+//         return <h4>Please add a contact</h4>;
+//     }
+
+//     return (
+//         <Fragment>
+//             <TransitionGroup>
+//             {filtered !== null 
+//                 ? filtered.map(contact => (
+//                     <CSSTransition key={contact.id} timeout={500} classNames="item">
+//                         <ContactItem  contact={contact} />
+//                     </CSSTransition>
+//                 ))
+//                 : contacts.map(contact => (
+//                     <CSSTransition key={contact.id} timeout={500} classNames="item">
+//                         <ContactItem contact={contact} />
+//                     </CSSTransition>
+//                 ))}
+//             </TransitionGroup>
+//         </Fragment>
+//     );
+// };
+
+// export default Contacts
 //=======================================================================
 //              Step #3  working with filter for UI
 //=======================================================================

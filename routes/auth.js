@@ -1,4 +1,4 @@
-//Log in, grap JWT from users.js
+//Log in, grab JWT from users.js
 //created auth.js middleware
 //======================================================================================================
 //                                  Step 3:secure route with auth token
