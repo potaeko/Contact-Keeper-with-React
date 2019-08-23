@@ -1,0 +1,5 @@
+{
+"MY_MONGO_URI" : "mongodb+srv://teera123:teera321@contactkeeper-ykakh.mongodb.net/test?retryWrites=true&w=majority"
+,
+"MY_jwtSecret" : "secret1234"
+}
