@@ -1,6 +1,6 @@
 node_modules/
-.env/
-.config
+.env
+config/porduction.json
 
 /client/build
 
